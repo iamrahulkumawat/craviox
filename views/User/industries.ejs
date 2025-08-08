@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Industries - craviox Web Development Services</title>
+
+		<meta charset="utf-8">
+		<meta name="description" content="Explore how craviox transforms industries through tailored web development services. Discover our expertise in various sectors.">
+		<meta name="keywords" content="web design agency, web development agency, website design agency, website development agency, web designing agency, web development company, web design agency india, web design company india, web developer agency, website making agency, website design and development agency, creative website development company" />  
+	<link rel="canonical" href="https://craviox.com/" />
+		<meta name="author" content="craviox.com">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<%- include('head.ejs') %>
+
+	</head>
+
+
+	<body id="body" class="tt-transition tt-boxed tt-smooth-scroll tt-magic-cursor">
+
+
+		<main id="body-inner">
+			<div id="page-transition">
+				<div class="ptr-overlay"></div>
+				<div class="ptr-preloader">
+					<div class="ptr-prel-content">
+					  <% if (settings && settings.length > 0) { %>
+						<% settings.forEach(setting => { %>
+						  <% if (setting.loader) { %>
+							<img src="../../logo_dark.png" class="ptr-prel-image tt-logo-light" alt="Logo">
+						  <% } %>
+						<% }) %>
+					  <% } else { %>
+						<img src="../../logo_dark.png" class="ptr-prel-image tt-logo-light" alt="Logo">
+					  <% } %>
+					</div>
+				  </div>
+			</div>
+			
+			<div id="magic-cursor">
+				<div id="ball"></div>
+			</div>
+			
+			<div id="scroll-container"> 
+				
+				<%- include('header.ejs') %>
+
+				<div id="content-wrap">
+
+
+					<div id="page-content">
+
+
+						<div class="tt-section no-padding">
+							<div class="tt-section-inner tt-wrap">
+
+								<div class="portfolio-interactive pi-full pi-center">
+									<div class="pi-inner">
+
+										<div class="portfolio-interactive-ghost">Industries</div>
+
+										<% industries.forEach(industry => { %>
+										<div class="portfolio-interactive-list">
+
+											<div class="portfolio-interactive-item">
+
+												<% if (industry.type === 'image') { %>
+												<figure class="pi-item-image">
+													<div class="pi-item-image-inner">
+														<img src="<%= industry.url %>" alt="<%= industry.url %>">
+													</div> 
+												</figure> 
+												<% } 
+												else if (industry.type === 'video') { %>
+													<figure class="pi-item-image">
+														<div class="pi-item-image-inner">
+															<video class="pi-item-video" loop muted preload="metadata" src="<%= industry.url %>">	
+															</video>
+														</div>
+														
+													</figure>
+													
+													<% } %>
+												<a href="/industry_detail/<%= industry.id %>" class="pi-item-title-link skew-on-scroll">
+													<div class="pi-item-title-link-inner">
+														<h2 class="pi-item-title"><%= industry.name %></h2>
+														<div class="pi-item-hover-title"><%= industry.name %></div>
+													</div>
+												</a> 
+											</div>
+											<% }) %>
+
+											
+											
+										</div>
+
+									</div> 
+
+								</div>
+
+							</div>
+						</div>
+
+
+					</div>
+					
+
+					<%- include('footer.ejs') %>
+
+
+				</div>
+
+			</div>
+
+
+		</main>
+
+
+        
+
+		<%- include('script.ejs') %>
+
+
+
+	</body>
+
+</html>

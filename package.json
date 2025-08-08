@@ -1,0 +1,35 @@
+{
+  "name": "inn.-pixel-studio",
+  "version": "1.0.0",
+"main": "index.js",
+  "scripts": {
+    "start": "index.js",
+    "dev": "index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.0",
+    "antd": "^5.16.2",
+    "cors": "^2.8.5",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.2",
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "http-proxy-middleware": "^3.0.0",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.17.3",
+    "fs": "^0.0.1-security",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.8",
+    "path": "^0.12.7"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^6.0.4"
+  }
+}

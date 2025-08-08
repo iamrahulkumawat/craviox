@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>INNOVATIVE PIXEL STUDIO | ADD PAYMENT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="INNOVATIVE PIXEL STUDIO" name="description">
+    <meta content="INNPS" name="author">
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <!-- App css -->
+    <link href="/sidebar.css" rel="stylesheet" type="text/css">
+
+    <!-- Icons css -->
+    <link href="/icons.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Theme Config Js -->
+    <script src="/config.js"></script>
+</head>
+<% if (userAccountType === 'admin') { %>
+<body>
+
+    <div class="flex wrapper">
+
+        <% if (userAccountType === 'admin') { %>
+            <%- include('../admin_sidebar.ejs') %>
+            <% } %>
+
+
+        <div class="page-content">
+
+            <!-- Topbar Start -->
+            <% if (userAccountType === 'admin') { %>
+                <%- include('../admin_header.ejs') %>
+                <% } %>
+            <!-- Topbar End -->
+
+            <main class="p-6">
+
+                <div class="">
+
+                    <div class="card">
+                        <div class="p-6">
+                            <h4 class="card-title mb-4">Create Payment</h4>
+
+                            <div class="">
+                                <div>
+                                    <form class="flex flex-col gap-6" action="/web/service" method="post"> 
+                                        
+                                        <div>
+                                            <label class="block text-gray-600 mb-2" for="date">Service headings</label class="block text-gray-600 mb-2">
+                                                <input type="text" name="heading" placeholder="Enter service heading" class="form-input" value="<%= serviceData ? serviceData.heading : '' %>">
+                                        </div>
+                                        <div>
+                                            <label class="block text-gray-600 mb-2" for="category">Service Paragraphs</label class="block text-gray-600 mb-2">
+                                                <textarea name="paragraph" cols="30" rows="10" placeholder="Enter service paragraph" class="form-input"><%= serviceData ? serviceData.paragraph : '' %></textarea>
+                                        </div>
+                                      
+                                        <button type="submit" class="btn bg-primary text-white text-lg w-full">Save</button>
+                                    </form><!-- From End -->
+                                </div>
+                                <div>
+                                    <form class="flex flex-col gap-6" action="/web/additional-service" method="post"> 
+                                        
+                                        <div>
+                                            <label class="block text-gray-600 mb-2" for="date">Service Additional headings</label class="block text-gray-600 mb-2">
+                                                <input type="text" name="additionalHeadings" class="form-input" placeholder="Enter service heading">
+                                        </div>
+                                        <div>
+                                            <label class="block text-gray-600 mb-2" for="category">Service Aditional Paragraphs</label class="block text-gray-600 mb-2">
+                                                <textarea  cols="30" rows="10" name="additionalParagraphs" placeholder="Enter service paragraph" class="form-input"></textarea>
+                                        </div>
+                                      
+                                        <button type="submit" class="btn bg-primary text-white text-lg w-full">Save</button>
+                                    </form><!-- From End -->
+                                </div>
+
+                                <div>
+                                  <% if (additionalServiceData && additionalServiceData.length > 0) { %>
+                                    <h2>Additional Services</h2>
+                                    <ul>
+                                      <% additionalServiceData.forEach(service => { %>
+                                        <li>
+                                          <strong><%= service.heading %></strong>: <%= service.paragraph %>
+                                          <a href="/web/edit-service/<%= service.id %>">Edit</a>
+                                          <form action="/web/delete-service" method="post" style="display: inline;">
+                                            <input type="hidden" name="serviceId" value="<%= service.id %>">
+                                            <button type="submit">Delete</button>
+                                          </form>
+                                        </li>
+                                      <% }); %>
+                                    </ul>
+                                  <% } else { %>
+                                    <p>No additional services available.</p>
+                                  <% } %>
+                                  
+                                </div>
+                            </div><!-- end Grid -->
+                            
+
+                        </div>
+                    </div> <!-- end card -->
+
+
+                </div> <!-- end grid -->
+
+            </main>
+
+            <!-- Footer Start -->
+            <footer class="footer card rounded-none mt-auto">
+                <div class="h-16 flex items-center px-8 rounded-none">
+                    <div class="flex md:justify-between justify-center w-full gap-4">
+                        <div>
+                            <script>document.write(new Date().getFullYear())</script> © Innovative pixel Studio - <a href="https://innovativepixelstudio.com" target="_blank">INNPS</a>
+                        </div>
+                        <div class="md:flex hidden gap-4 item-center md:justify-end">
+                            <a href="javascript: void(0);" class="text-sm leading-5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">About</a>
+                            <a href="javascript: void(0);" class="text-sm leading-5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Help</a>
+                            <a href="javascript: void(0);" class="text-sm leading-5 text-zinc-600 transition hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer End -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+
+    <!-- Theme Settings -->
+    <div>
+        <!-- Theme Settings Offcanvas -->
+        <div id="theme-customization" class="fc-offcanvas-open:translate-x-0 hidden translate-x-full rtl:-translate-x-full fixed inset-y-0 end-0
+             transition-all duration-300 transform max-w-[260px] w-full z-50 bg-white dark:bg-gray-800" tabindex="-1">
+            <div class="h-16 bg-primary text-white flex items-center px-6 gap-3">
+                <h5 class="text-base grow">Theme Customizer</h5>
+                <button type="button" class="h-6 w-6 flex items-center justify-center rounded-full bg-dark text-white" data-fc-dismiss><i class="mdi mdi-close text-sm"></i></button>
+            </div>
+
+            <div class="h-[calc(100vh-64px)]" data-simplebar>
+                <div class="p-6">
+                    <div class="py-3 px-5 border border-warning/25 bg-warning/20 text-warning rounded mb-6" role="alert">
+                        <span class="font-medium">Customize </span> the overall color scheme, Layout, etc.
+                    </div>
+                
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-sm mb-3">Color Scheme</h5>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-mode" id="layout-color-light" value="light">
+                                <label class="ms-2" for="layout-color-light">Light</label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-mode" id="layout-color-dark" value="dark">
+                                <label class="ms-2" for="layout-color-dark"> Dark </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-sm mb-3">Direction</h5>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="dir" id="direction-ltr" value="ltr">
+                                <label class="ms-2" for="direction-ltr"> LTR </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="dir" id="direction-rtl" value="rtl">
+                                <label class="ms-2" for="direction-rtl"> RTL </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-sm mb-3">Layout Position (Menu and Topbar)</h5>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-layout-position" id="layout-position-fixed" value="fixed">
+                                <label class="ms-2" for="layout-position-fixed"> Fixed </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-layout-position" id="layout-position-scrollable" value="scrollable">
+                                <label class="ms-2" for="layout-position-scrollable"> Scrollable </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 2xl:block hidden">
+                        <h5 class="font-semibold text-sm mb-3">Width</h5>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-layout-width" id="layout-mode-default" value="default">
+                                <label class="ms-2" for="layout-mode-default"> Fluid </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-layout-width" id="layout-mode-boxed" value="boxed">
+                                <label class="ms-2" for="layout-mode-boxed"> Boxed </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4" id="leftSidebarSize">
+                        <h5 class="font-semibold text-sm mb-3">Left Sidebar Size</h5>
+                        <div class="flex flex-col gap-3">
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-sidenav-view" id="sidenav-view-default" value="default">
+                                <label class="ms-2" for="sidenav-view-default"> Default </label>
+                            </div>
+
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-sidenav-view" id="sidenav-view-condensed" value="condensed">
+                                <label class="ms-2" for="sidenav-view-condensed"> Condensed (Small) </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-sidenav-view" id="sidenav-view-compact" value="compact">
+                                <label class="ms-2" for="sidenav-view-compact"> Compact </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-sidenav-view" id="sidenav-view-mobile" value="mobile">
+                                <label class="ms-2" for="sidenav-view-mobile"> Mobile </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-sidenav-view" id="sidenav-view-hidden" value="hidden">
+                                <label class="ms-2" for="sidenav-view-hidden">Hidden </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="font-semibold text-sm mb-3">Menu Color</h5>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-menu-color" id="menu-color-light" value="light">
+                                <label class="ms-2" for="menu-color-light"> Light </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-menu-color" id="menu-color-dark" value="dark">
+                                <label class="ms-2" for="menu-color-dark"> Dark </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-menu-color" id="menu-color-brand" value="brand">
+                                <label class="ms-2" for="menu-color-brand"> Brand </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-menu-color" id="menu-color-gradient" value="gradient">
+                                <label class="ms-2" for="menu-color-gradient"> Gradient </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h5 class="font-semibold text-sm mb-3">Topbar Color</h5>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-topbar-color" id="topbar-color-light" value="light">
+                                <label class="ms-2" for="topbar-color-light"> Light </label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input class="form-switch form-switch-sm text-primary" type="checkbox" name="data-topbar-color" id="topbar-color-dark" value="dark">
+                                <label class="ms-2" for="topbar-color-dark"> Dark </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn bg-primary text-white w-full" id="reset-layout">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+  <script>
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+</script>
+
+
+
+<script>
+    // Optionally, you can add a script to handle the copy event
+    document.addEventListener('copy', function(event) {
+        // Prevent the default copy behavior
+        event.preventDefault();
+        // Optionally, provide custom feedback to the user
+        alert('Copying is not allowed.');
+    });
+</script>
+
+
+    <!-- Plugin Js -->
+    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/simplebar/simplebar.min.js"></script>
+    <script src="/libs/lucide/umd/lucide.min.js"></script>
+    <script src="/libs/@frostui/tailwindcss/frostui.js"></script>
+
+    <!-- App Js -->
+    <script src="/app.js"></script>
+
+
+
+</body>
+<% } else { %>
+    <%- include('../400.ejs') %>
+<% } %>
+
+</html>
